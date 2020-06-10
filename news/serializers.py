@@ -13,12 +13,12 @@ class PostSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Like
-        fields = ['user', 'post']
+        fields = ['user', 'post', 'creation_date']
         read_only_fields = ['user']
 
 
 class UnlikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unlike
-        fields = ['user', 'post']
+        fields = ['user', 'post', 'creation_date']
         read_only_fields = ['user']

@@ -1,10 +1,9 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 
-from news.models import Post
-from news.serializers import PostSerializer
+from news.models import Post, Like, Unlike
+from news.serializers import PostSerializer, LikeSerializer, UnlikeSerializer
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -23,3 +22,27 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+
+
+class LikeViewSet(viewsets.ModelViewSet):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            raise ValidationError(e)
+
+
+class UnlikeViewSet(viewsets.ModelViewSet):
+    queryset = Unlike.objects.all()
+    serializer_class = UnlikeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        try:
+            serializer.save(user=self.request.user)
+        except Exception as e:
+            raise ValidationError(e)
