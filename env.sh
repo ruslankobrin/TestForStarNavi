@@ -1,0 +1,5 @@
+export DATABASE_NAME='test_task'
+export DATABASE_USER='buy_user'
+export DATABASE_PASSWORD='pass12pass'
+export DATABASE_HOST='127.0.0.1'
+export DATABASE_PORT='5432'
