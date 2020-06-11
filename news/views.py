@@ -1,3 +1,5 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.views import generic
 from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -46,3 +48,8 @@ class UnlikeViewSet(viewsets.ModelViewSet):
             serializer.save(user=self.request.user)
         except Exception as e:
             raise ValidationError(e)
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = '../'
+    template_name = 'signup.html'
