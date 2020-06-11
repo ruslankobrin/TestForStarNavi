@@ -9,7 +9,7 @@ from news.serializers import PostSerializer, LikeSerializer, UnlikeSerializer
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         try:
@@ -27,7 +27,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         try:
@@ -39,7 +39,7 @@ class LikeViewSet(viewsets.ModelViewSet):
 class UnlikeViewSet(viewsets.ModelViewSet):
     queryset = Unlike.objects.all()
     serializer_class = UnlikeSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
         try:
