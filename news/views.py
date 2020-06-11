@@ -2,8 +2,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from rest_framework import viewsets
 from rest_framework.exceptions import ValidationError
+from django_filters import rest_framework as filters
 from rest_framework.permissions import IsAuthenticated
 
+from news.filters import LikeFilter
 from news.models import Post, Like, Unlike
 from news.serializers import PostSerializer, LikeSerializer, UnlikeSerializer
 
@@ -26,10 +28,13 @@ class PostViewSet(viewsets.ModelViewSet):
         return self.destroy(request, *args, **kwargs)
 
 
+
 class LikeViewSet(viewsets.ModelViewSet):
     queryset = Like.objects.all()
     serializer_class = LikeSerializer
     # permission_classes = [IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = LikeFilter
 
     def perform_create(self, serializer):
         try:
